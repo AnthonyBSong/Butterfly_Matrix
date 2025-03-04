@@ -10,8 +10,7 @@ module fifo #(
     input  wire [DATA_WIDTH-1:0]  data_in,
     output wire [DATA_WIDTH-1:0]  data_out,
     output wire                   empty,
-    output wire                   full,
-    output wire [PTR_SIZE:0]      count  // Current number of items in the FIFO
+    output wire                   full
 );
 
     // FIFO memory array
@@ -21,8 +20,7 @@ module fifo #(
     reg empty_reg;
     reg full_reg;
     
-    // Count register (one extra bit to count up to DEPTH)
-    reg [PTR_SIZE:0] count_reg;
+    integer i;
 
     // Write pointer process
     always @ (posedge clk or posedge rst) begin
@@ -61,7 +59,6 @@ module fifo #(
     end
 
     // Data storage process
-    integer i;
     always @ (posedge clk or posedge rst) begin
         if (rst) begin
             for (i = 0; i < DEPTH; i = i + 1)
@@ -76,20 +73,5 @@ module fifo #(
     // Status outputs
     assign empty = empty_reg;
     assign full  = full_reg;
-
-    always @ (posedge clk or posedge rst) begin
-        if (rst)
-            count_reg <= 0;
-        else begin
-            if (wr_en && !full_reg && !(re_en && !empty_reg))
-                count_reg <= count_reg + 1;
-            else if (re_en && !empty_reg && !(wr_en && !full_reg))
-                count_reg <= count_reg - 1;
-            else
-                count_reg <= count_reg;
-        end
-    end
-
-    assign count = count_reg;
 
 endmodule
