@@ -10,7 +10,7 @@ module fifoArray (
     output wire full
 );
 
-parameter DEPTH = 16; // Depth of the FIFO
+parameter DEPTH = 32; // Depth of the FIFO
 parameter DATA_WIDTH = 8; // Width of the data bus
 parameter PTR_SIZE = 5;
 
