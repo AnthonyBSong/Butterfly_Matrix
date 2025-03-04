@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 
     // Simulation parameters
     const int clock_period = 10; // clock period in time units (e.g., ns)
-    const int sim_cycles = 50;   // total simulation cycles
+    const int sim_cycles = 50;   // total simulation cyclesgit 
 
     // Initialize inputs
     top->clk = 0;
