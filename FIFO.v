@@ -3,7 +3,7 @@ module fifoArray (
     input wire clk,
     input wire rst,
     input wire wr_en,
-    input wire re_en
+    input wire re_en,
     input wire [DATA_WIDTH-1:0] data_in,
     output wire [DATA_WIDTH-1:0] data_out,
     output wire empty,
@@ -14,8 +14,7 @@ parameter DEPTH = 32; // Depth of the FIFO
 parameter DATA_WIDTH = 8; // Width of the data bus
 parameter PTR_SIZE = 5;
 
-reg [DATA_WIDTH-1:0] memory [0:DEPTH-1]; //register array for 8 numbers
-                                            // each data of 8 bits
+reg [DATA_WIDTH-1:0] memory [0:DEPTH-1];
 reg [PTR_SIZE-1:0] wr_ptr;
 reg [PTR_SIZE-1:0] rd_ptr;
 reg empty_reg;
@@ -50,7 +49,7 @@ always @ (posedge clk or posedge rst) begin
     if (rst) begin
         integer i;
         initial begin
-            for (i = 0; i < MEMORY_SIZE; i = i + 1)
+            for (i = 0; i < DATA_WIDTH; i = i + 1)
                 memory[i] = {DATA_WIDTH{1'bz}};      
         end
     end
