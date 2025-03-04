@@ -1,4 +1,4 @@
-module fifoArray #(
+module fifo #(
     parameter DEPTH = 32,         // Depth of the FIFO
     parameter DATA_WIDTH = 8,     // Width of the data bus
     parameter PTR_SIZE = 5
